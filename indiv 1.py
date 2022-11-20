@@ -3,18 +3,18 @@
 
 
 def pink(func):
-    import re
 
-    def pnk(chars=" !?"):
+    def pnk(text, chars=" !?"):
 
-        print(chars)
+        print(text)
 
-        h = func(s)
-        rx = re.compile('[ !?]')
-        hh = rx.sub('-', h)
-        print(hh)
-        ch = re.sub(r'-+', '-', hh)
-        print(ch)
+        h = ''.join(map(lambda x: x if x not in chars else '-', func(text)))
+        print(h)
+        while '--' in h:
+            h = h.replace('--', '-')
+        print(h)
+        return h
+
 
     return pnk
 
@@ -32,8 +32,8 @@ def wrapper(text):
 
 
 if __name__ == "__main__":
-    s = 'Б щ --- ! ? - ?Барабанщик сильно занят, Барабанщик барабанит: \
-    – Та-ра-ра, та-ра-ра,\
-     На прогулку нам пора!'
+    s = 'Я щ --- ! ? - ?помню чудное мгновенье: Передо мной явилась ты, \
+    Как мимолетное виденье,\
+     Как гений чистой красоты.'
 
     x = wrapper(s)
